@@ -1,0 +1,229 @@
+{
+  "intents": [
+    {
+      "intent": "support",
+      "examples": [
+        {
+          "text": "help"
+        }
+      ],
+      "description": "support the user"
+    },
+    {
+      "intent": "welcome",
+      "examples": [
+        {
+          "text": "heeey"
+        },
+        {
+          "text": "heey"
+        },
+        {
+          "text": "helllo"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hii"
+        },
+        {
+          "text": "hiii"
+        },
+        {
+          "text": "what's up"
+        }
+      ],
+      "description": "welcoming"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "problem",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "issue",
+          "synonyms": [
+            "trouble"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "support",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "help",
+          "synonyms": [
+            "assist"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "what is the problem"
+              },
+              {
+                "text": "Please check the link on the site if the problem is not resolved yet. Contact us 0000000"
+              },
+              {
+                "text": "thank u"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_1_1625949572253",
+      "event_name": "focus",
+      "dialog_node": "handler_2_1625949572268",
+      "previous_sibling": "handler_9_1625949572268"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1625949572253",
+      "context": {
+        "support": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_9_1625949572268"
+    },
+    {
+      "type": "standard",
+      "title": "welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello , how can I help you"
+              },
+              {
+                "text": "Hey there , how can I help you?"
+              },
+              {
+                "text": "Hi , how can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#welcome",
+      "dialog_node": "node_1_1625949335971",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "frame",
+      "title": "support",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Please check the link on the site if the problem is not resolved yet. Contact us 0000000 thank u."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@support",
+      "dialog_node": "node_4_1625948816864",
+      "previous_sibling": "node_1_1625949335971"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_4_1625948816864",
+      "variable": "$support",
+      "dialog_node": "slot_1_1625949572253"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              },
+              {
+                "text": "Hey there , How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Talk",
+  "language": "en",
+  "description": ""
+}
